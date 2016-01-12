@@ -94,7 +94,7 @@ extern unsigned int  CFG_BLOCKSIZE;
 
 #define CONFIG_BOOTDELAY	1	/* autoboot after 1 seconds	*/
 
-#define CONFIG_BAUDRATE		115200
+#define CONFIG_BAUDRATE	MT7621_UART_BAUD
 
 #define CONFIG_SERVERIP 192.168.1.2
 #define CONFIG_IPADDR 192.168.1.1

@@ -1351,6 +1351,18 @@ if [ "$MT7621_CPU_50MHZ" = "y" ]; then
     define_hex  MT7621_CPU_FREQUENCY    32
 fi
 
+choice 'UART baud rate' "115200bps MT7621_UART_115200 \
+						57600bps MT7621_UART_57600"
+						57600bps
+if [ "$MT7621_UART_115200" = "y" ]; then
+    define_int  MT7621_UART_BAUD 115200
+    define_int MT7621_UCLK_20M 0
+fi
+if [ "$MT7621_UART_57600" = "y" ]; then
+    define_int  MT7621_UART_BAUD 57600
+    define_int MT7621_UCLK_20M 1
+fi
+
 define_bool ON_BOARD_DDR3 y
 define_bool ON_BOARD_DDR_WIDTH_16 y
 define_bool ON_BOARD_16BIT_DRAM_BUS y

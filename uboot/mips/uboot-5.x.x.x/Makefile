@@ -254,6 +254,12 @@ endif
 ifeq ($(MT7621_CPU_875MHZ), y)
 		echo "0 224a00c0"|xxd -r|dd bs=1 seek=32 of=uboot_a.bin conv=notrunc
 endif
+ifeq ($(MT7621_UART_115200), y)
+		echo "0 00c20100"|xxd -r|dd bs=1 seek=304 of=uboot_a.bin conv=notrunc
+endif
+ifeq ($(MT7621_UART_57600), y)
+		echo "0 00e10000"|xxd -r|dd bs=1 seek=304 of=uboot_a.bin conv=notrunc
+endif
 ifeq ($(DDR_ACT_SETTING), y)		
 		./mt7621_ddr.sh uboot_a.bin uboot_a.bin mt7621_ddr_param.txt $(DDR_CHIP) $(CFG_ENV_IS)
 		echo "0 10"|xxd -r|dd bs=1 count=1 seek=38 of=uboot_a.bin conv=notrunc
@@ -268,8 +274,16 @@ else
 uboot_a.bin:	uboot.bin mt7621_stage_sram.bin
 		cp uboot.bin uboot_a.bin
 		chmod 777 uboot_a.bin
-		dd if=mt7621_stage_sram.bin of=uboot_a.bin bs=1 count=$(shell stat -c %s mt7621_stage_sram.bin) \
+		cp mt7621_stage_sram.bin mt7621_stage_sram.patch.bin
+ifeq ($(MT7621_UART_115200), y)
+		echo "0 00c20100"|xxd -r|dd bs=1 seek=304 of=mt7621_stage_sram.patch.bin conv=notrunc
+endif
+ifeq ($(MT7621_UART_57600), y)
+		echo "0 00e10000"|xxd -r|dd bs=1 seek=304 of=mt7621_stage_sram.patch.bin conv=notrunc
+endif
+		dd if=mt7621_stage_sram.patch.bin of=uboot_a.bin bs=1 count=$(shell stat -c %s mt7621_stage_sram.bin) \
 		seek=$(shell stat -c %s uboot.bin)
+		rm mt7621_stage_sram.patch.bin
 ifeq ($(MT7621_CPU_800MHZ), y)
 		echo "0 725a00c0"|xxd -r|dd bs=1 of=uboot_a.bin seek=$(shell echo "(($(shell stat -c %s uboot.bin)+32))" |bc)  conv=notrunc
 endif
