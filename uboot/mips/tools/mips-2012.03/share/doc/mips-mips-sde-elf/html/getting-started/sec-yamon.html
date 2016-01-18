@@ -1,0 +1,25 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>3.5. Using Sourcery CodeBench with YAMON</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="chap-target.html" title="Chapter 3. Sourcery CodeBench Lite for MIPS ELF"><link rel="prev" href="sec-malta.html" title="3.4. Using Sourcery CodeBench with MIPS Boards"><link rel="next" href="sec-mips-elf-profiling.html" title="3.6. Profiling Support"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.5. Using Sourcery CodeBench with YAMON</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-malta.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Sourcery CodeBench Lite for MIPS ELF</th><td width="20%" align="right"> <a accesskey="n" href="sec-mips-elf-profiling.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-yamon"></a>3.5. Using Sourcery CodeBench with YAMON</h2></div></div></div><p>
+      For YAMON targets, CS3 provides basic I/O services via the YAMON console.
+      This section briefly covers how to load and run programs using YAMON.
+    </p><p>
+      To prepare an application to run from YAMON, you must first convert
+      the executable file to SREC format.  
+      You can do this from the command line on your host system 
+      using the objcopy utility provided with Sourcery CodeBench Lite.
+      </p><pre class="screen">&gt; mips-sde-elf-objcopy -O srec <em class="replaceable"><code>prog</code></em> <em class="replaceable"><code>prog</code></em>.srec</pre><p>
+    </p><p>
+      Next, use YAMON to load the SREC image file into RAM.  For example, to
+      load via TFTP, use a command similar to:
+      </p><pre class="screen">YAMON&gt; load tftp://<em class="replaceable"><code>host</code></em>/<em class="replaceable"><code>path</code></em>/<em class="replaceable"><code>prog</code></em>.srec</pre><p>
+    </p><p>
+      Then, start the program from the YAMON prompt:
+      </p><pre class="screen">YAMON&gt; go .</pre><p>
+    </p><p>
+      For more detailed information about YAMON usage and features, 
+      refer to the <em class="citetitle">YAMON User's Manual</em>.
+    </p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning</h3><p>
+	Using YAMON with 64-bit multilibs is not fully
+	supported and may have issues.  YAMON is usually built using
+	the O32 ABI, which is not forward-compatible with the N64 ABI used in
+	64-bit multilibs.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-malta.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="chap-target.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sec-mips-elf-profiling.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.4. Using Sourcery CodeBench with MIPS Boards </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.6. Profiling Support</td></tr></table></div></body></html>

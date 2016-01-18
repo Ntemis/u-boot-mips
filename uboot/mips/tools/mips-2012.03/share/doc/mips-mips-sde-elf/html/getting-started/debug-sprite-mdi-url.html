@@ -1,0 +1,139 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>6.5. MDI Devices</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="sprite.html" title="Chapter 6. Sourcery CodeBench Debug Sprite"><link rel="prev" href="sec-sprite-options.html" title="6.4. Sourcery CodeBench Debug Sprite Options"><link rel="next" href="ch06s06.html" title="6.6. Debugging a Remote Board"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.5. MDI Devices</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-sprite-options.html">Prev</a> </td><th width="60%" align="center">Chapter 6. Sourcery CodeBench Debug Sprite</th><td width="20%" align="right"> <a accesskey="n" href="ch06s06.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="debug-sprite-mdi-url"></a>6.5. MDI Devices</h2></div></div></div><p>
+  The Sourcery CodeBench Debug Sprite for MIPS supports MDI
+  (Microprocessor Debug Interface) devices.
+  Each MDI device is identified by a target number and device number;
+  these form the <em class="replaceable"><code>path</code></em> part of the device URL,
+  and the <em class="replaceable"><code>hostname</code></em> and 
+  <em class="replaceable"><code>port</code></em> must be empty or omitted.
+  Thus, the <em class="replaceable"><code>device-url</code></em> has the form:
+
+  </p><pre class="screen">mdi:///<em class="replaceable"><code>targetnum</code></em>/<em class="replaceable"><code>devicenum</code></em>[?<em class="replaceable"><code>device-options</code></em>]</pre><p>
+  </p><p>
+  You can also use the environment variables 
+  <code class="envar">GDBMDITARGET</code> and <code class="envar">GDBMDIDEVICE</code>
+  to provide defaults for the <em class="replaceable"><code>targetnum</code></em>
+  and <em class="replaceable"><code>devicenum</code></em>.
+  </p><p>
+  The following <em class="replaceable"><code>device-options</code></em> are permitted:
+
+  </p><div class="variablelist"><dl><dt><span class="term"><code class="option">lib=<em class="replaceable"><code>filename</code></em></code></span></dt><dd><p>
+	This option specifies the MDI library to load.
+	It is equivalent to setting the <code class="envar">GDBMDILIB</code>
+	environment variable.
+      </p></dd><dt><span class="term"><code class="option">cfg=<em class="replaceable"><code>filename</code></em></code></span></dt><dd><p>
+	Some MDI target libraries, such as MIPSsim, require a
+	configuration file. 
+	(This is distinct from the Sprite's own
+	<em class="replaceable"><code>board-file</code></em>.)
+	You can use this option to specify the file.
+	It is equivalent to setting the <code class="envar">GDBMIPSSIMCONFIG</code>
+	environment variable.
+      </p></dd><dt><span class="term"><code class="option">rst=<em class="replaceable"><code>seconds</code></em></code></span></dt><dd><p>
+	This option can be used to specify a delay after the target is
+	reset by the Sprite.  
+	If the value of <em class="replaceable"><code>seconds</code></em> is greater
+	than zero, then execution is resumed for the specified number
+	of seconds;
+	this can be used to allow power-on firmware to initialize
+	the memory controller and peripherals.
+	Then the target is halted again and queried for configuration.
+      </p><p>
+	If the value of	<em class="replaceable"><code>seconds</code></em>
+	is <code class="literal">-1</code>, then the target is queried immediately
+	without reset.
+	This is the same effect as passing the <code class="option">-a</code>
+	command-line option to the Sprite, which allows the Sprite
+	to attach to a running program.
+      </p><p>
+	This option is equivalent to setting the
+	<code class="envar">GDBMDICONNRST</code> environment variable.
+	If neither the option nor the environment variable are provided,
+	the default is to reset the target and query it immediately
+	unless the <code class="option">-a</code> option is specified.  
+      </p></dd><dt><span class="term"><code class="option">group=/<em class="replaceable"><code>targetn</code></em>/<em class="replaceable"><code>devicen</code></em></code></span></dt><dd><p>
+	This option may be specified multiple times and is cumulative.
+	Each of	the specified devices is opened and queried and they are
+	all treated as threads of execution,
+	subject to being enabled or active; if a device is
+	disabled or has no active thread contexts associated with it,
+	it is not visible to GDB but is still under control of the
+	Sprite in case its state changes.
+	This option cannot be used in combination with the
+	<code class="option">team=</code> option.
+      </p></dd><dt><span class="term"><code class="option">team=/<em class="replaceable"><code>targetn</code></em>/<em class="replaceable"><code>devicen</code></em></code></span></dt><dd><p>
+	This option may be specified multiple times and is cumulative.
+	The specified devices are not opened, but are associated with the
+	base device by means of the MDI team mechanism for the purpose of
+	synchronization.  The specified devices may still be opened and
+	controlled by another debugger
+	(such as another instance of the Debug Sprite) independently.
+	This option cannot be used in combination with the
+	<code class="option">group=</code> option.
+      </p></dd></dl></div><p>
+  </p><p>
+    Before you can connect to a target using the MDI API, 
+    you must tell the Debug Sprite which shared library or DLL to load for your 
+    simulator or device.  On Linux hosts you 
+    should add the directory containing the shared library files 
+    to your <code class="envar">LD_LIBRARY_PATH</code> environment variable.  
+    On Windows hosts, add the directory containing the DLLs to your
+    <code class="envar">PATH</code> environment variable.  
+    Then, either set the environment variable
+    <code class="envar">GDBMDILIB</code> to the base name of the MDI library 
+    before starting the Debug Sprite, or use the
+    <code class="option">lib=</code> device option to specify the library
+    to load.
+  </p><p>
+    Similarly, the <code class="option">-i</code> command-line option can only probe
+    for devices if you have set the <code class="envar">PATH</code> or 
+    <code class="envar">LD_LIBRARY_PATH</code> environment variable appropriately,
+    and specify an MDI library using either the
+    <code class="envar">GDBMDILIB</code> environment variable or the
+    <code class="option">lib=</code> device option.
+    Otherwise, it reports only the generic 
+    <em class="replaceable"><code>device-url</code></em> syntax.
+  </p><p>
+    For example, to use an FS2 probe on a Windows host to debug a MIPS Malta
+    board, first add the directory containing the MDI DLLs to your
+    <code class="envar">PATH</code>.  Then you can invoke the Sprite from GDB using a
+    command line similar to:
+    </p><pre class="screen">(gdb) target remote | mips-sde-elf-sprite \
+'mdi:///2/2?lib=jnetfs2mdilib.dll&amp;rst=7' malta</pre><p>
+    The quotes are required to prevent special characters in the
+    <em class="replaceable"><code>device-url</code></em> from being interpreted by the shell.
+  </p><p>
+    In the above command, the <code class="option">rst=7</code> option provides
+    for a sufficient delay for the board's reset code to execute on
+    connection.  Since this takes several seconds, GDB may time out waiting
+    for the Sprite to respond.  You can prevent this by issuing this command
+    before you connect to the Sprite:
+    </p><pre class="screen">(gdb) set remotetimeout 10</pre><p>
+    
+  </p><p>
+    To use the Sprite with MIPSsim, a configuration file is required.  The
+    configuration files provided with the MIPSsim distribution are intended
+    for use with standalone execution from the command line, rather than
+    running the program from the debugger.  So, make a copy and comment out
+    the <code class="literal">APP_FILE</code> setting.   It is also recommended that you
+    comment out <code class="literal">TRACE_FILE</code> as well, since the trace files
+    can be very large.
+  </p><p>
+    To connect to MIPSsim using the Sprite on a Linux host, first set
+    your <code class="envar">LD_LIBRARY_PATH</code> and <code class="envar">GDBMDILIB</code> as
+    described above.  You can run the Sprite from the shell to probe
+    for devices to verify that your setup is correct:
+    </p><pre class="screen">&gt; mips-sde-elf-sprite -i</pre><p>
+    Then, from GDB, use a command similar to:
+    </p><pre class="screen">(gdb) target remote | mips-sde-elf-sprite \
+'mdi:///23/2?cfg=24KE.cfg&amp;rst=-1' mipssim</pre><p>
+    Fill in your target and device numbers as reported by the probe output,
+    and the full pathname to your configuration file.
+    The <code class="option">rst=-1</code> option is required,
+    as MIPSsim does not support reset.
+  </p><p>
+    This section describes only the basic MDI usage;
+    refer to the documentation for your MDI simulator or debug device
+    for details specific to that target.
+    Note, in particular, that some MDI targets may require you to set up
+    a license in addition to the steps given here.
+  </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-sprite-options.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sprite.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch06s06.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.4. Sourcery CodeBench Debug Sprite Options </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 6.6. Debugging a Remote Board</td></tr></table></div></body></html>

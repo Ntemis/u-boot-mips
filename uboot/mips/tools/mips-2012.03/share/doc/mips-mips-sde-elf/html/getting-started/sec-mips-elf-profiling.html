@@ -1,0 +1,22 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>3.6. Profiling Support</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="chap-target.html" title="Chapter 3. Sourcery CodeBench Lite for MIPS ELF"><link rel="prev" href="sec-yamon.html" title="3.5. Using Sourcery CodeBench with YAMON"><link rel="next" href="sec-using-flash.html" title="3.7. Using Flash Memory"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.6. Profiling Support</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-yamon.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Sourcery CodeBench Lite for MIPS ELF</th><td width="20%" align="right"> <a accesskey="n" href="sec-using-flash.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-mips-elf-profiling"></a>3.6. Profiling Support</h2></div></div></div><p>
+      Sourcery CodeBench Lite includes CS3 support for code profiling on MIPS ELF
+      targets using <code class="command">gprof</code>.  To enable profiling,
+      compile your program with the <code class="option">-pg</code> option.
+      
+      You must also build your program with a hosted linker script.
+    </p><p>
+      You can run a program built with profiling from the debugger the same
+      as you would any other hosted application.
+      While your program is running, profiling data is saved in buffers in
+      the heap memory area on the target.  This may affect the amount of
+      memory available to your application, and it is also possible that
+      the profiler itself may run out of memory.  Profiling data is written
+      to a file on the host (<code class="filename">gmon.out</code>) only when your
+      application exits.  Since many embedded applications are structured
+      to run indefinitely rather than exit, you may need to add an explicit
+      <code class="function">exit</code> call in order to collect profiling data.
+    </p><p>
+      For instructions on using the <code class="command">mips-sde-elf-gprof</code>
+      utility to process the collected <code class="filename">gmon.out</code> data,
+      refer to the GNU Profiler (gprof) manual included with Sourcery CodeBench Lite.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-yamon.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="chap-target.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sec-using-flash.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.5. Using Sourcery CodeBench with YAMON </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.7. Using Flash Memory</td></tr></table></div></body></html>

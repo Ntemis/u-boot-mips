@@ -1,0 +1,70 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5.4. Interrupt Vectors and Handlers</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="chap-cs3.html" title="Chapter 5. CS3&#8482;: The CodeSourcery Common Startup Code Sequence"><link rel="prev" href="sec-cs3-memory-layout.html" title="5.3. Memory Layout"><link rel="next" href="sec-cs3-supported-boards.html" title="5.5. Supported Boards for MIPS ELF"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.4. Interrupt Vectors and Handlers</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-cs3-memory-layout.html">Prev</a> </td><th width="60%" align="center">Chapter 5. CS3&#8482;: The CodeSourcery Common Startup Code Sequence</th><td width="20%" align="right"> <a accesskey="n" href="sec-cs3-supported-boards.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-cs3-interrupts"></a>5.4. Interrupt Vectors and Handlers</h2></div></div></div><p>
+      CS3 provides standard handlers for interrupts, exceptions and
+      traps, but also allows you to define your own handlers as needed.
+      In this section, we use the term
+      <em class="firstterm">interrupt</em> as a generic term for this
+      entire class of events.
+    </p><p>
+      Different processors handle interrupts in various ways, but
+      there are two general approaches:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Some processors fetch an address from an array indexed by
+            the interrupt number, and jump to that address.  We call
+            these <em class="firstterm">address vector</em> processors.
+          </p></li><li><p>
+            Others multiply the interrupt number by some constant
+            factor, add a base address, and jump directly to that
+            address.  Here, the interrupt vector consists of blocks of
+            code, so we call these <em class="firstterm">code vector</em>
+            processors.
+          </p></li><li><p>
+	    Still other processors use a more complicated descriptor
+	    mechanism for the interrupt table.
+	  </p></li></ul></div><p>
+
+      
+
+      
+
+      
+      <span>
+        MIPS processors use the code vector model.
+      </span>
+
+      
+
+      
+
+      The remainder of this section assumes that you have some understanding
+      of the specific requirements for your target; refer to the architecture
+      manuals if necessary.
+    </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id503784"></a>5.4.1. MIPS ELF Interrupt Vector Implementation</h3></div></div></div><p>
+	On MIPS ELF targets, CS3 provides interrupt and
+	exception handling support using the MIPS SDE library interface,
+	which is integrated with the exception support provided by the
+	YAMON boot monitor.
+	The interfaces are modelled on the POSIX signal handling
+	mechanism and are declared in the C header file
+	<code class="filename">mips/xcpt.h</code>.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-cs3-interrupt-handlers"></a>5.4.2. Writing Interrupt Handlers</h3></div></div></div><p>
+        Interrupt handlers typically require special call/return and
+        register usage conventions that are target-specific and beyond
+        the scope of this document.  In many cases, normal C functions
+	cannot be used as interrupt handlers.
+	
+      </p><p>
+        As an alternative to writing interrupt handlers in assembly language,
+        on MIPS targets they may be written in C using the
+        <code class="literal">interrupt</code>
+        
+	attribute.  This tells the compiler to generate appropriate function
+	entry and exit sequences for an interrupt handler.
+	
+        
+        <span>
+	  There are additional MIPS-specific attributes you can specify
+	  to modify the behavior of the interrupt handler.
+        </span>
+	Refer to the GCC manual for more details about attribute syntax
+	and usage.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-cs3-memory-layout.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="chap-cs3.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sec-cs3-supported-boards.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">5.3. Memory Layout </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 5.5. Supported Boards for MIPS ELF</td></tr></table></div></body></html>

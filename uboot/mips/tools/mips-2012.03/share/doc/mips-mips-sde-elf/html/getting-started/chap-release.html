@@ -1,0 +1,454 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Appendix A. Sourcery CodeBench Lite Release Notes</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><meta name="description" content=" This appendix contains information about changes in this release of Sourcery CodeBench Lite for MIPS ELF. You should read through these notes to learn about new features and bug fixes."><link rel="home" href="index.html" title="Sourcery CodeBench Lite"><link rel="up" href="index.html" title="Sourcery CodeBench Lite"><link rel="prev" href="ch07s03.html" title="7.3. Manuals for GNU Toolchain Components"><link rel="next" href="chap-license.html" title="Appendix B. Sourcery CodeBench Lite Licenses"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix A. Sourcery CodeBench Lite Release Notes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch07s03.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="chap-license.html">Next</a></td></tr></table><hr></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap-release"></a>Appendix A. Sourcery CodeBench Lite Release Notes</h2></div><div><div class="abstract"><p class="title"><b></b></p><p>
+     This appendix contains information about changes in this
+     release of Sourcery CodeBench Lite for MIPS ELF.  You should read
+     through these notes to learn about new features and bug fixes.
+    </p></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="chap-release.html#sec-release-notes">A.1. Changes in Sourcery CodeBench Lite for MIPS ELF</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sec-release-notes"></a>A.1. Changes in Sourcery CodeBench Lite for MIPS ELF</h2></div></div></div><p>
+      This section documents Sourcery CodeBench Lite changes for each released revision.
+    </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id506905"></a>A.1.1. Changes in Sourcery CodeBench Lite 2012.03-64</h3></div></div></div><p><b>
+          <code class="code">__attribute__((nomips16))</code> code generation bug fix
+        . </b>
+          A bug in GCC that caused incorrect code to be generated for
+          functions with the <code class="code">__attribute__((nomips16))</code>
+          attribute while compiling with <code class="option">-mips16</code> has
+          been fixed.
+        </p><p><b>C++ bug fix. </b>
+	  A bug that caused unpredictable program behavior in C++ programs
+	  has been fixed.
+        </p><p><b>Invalid microMIPS relocation fixed. </b>
+          A bug in branch code generation for microMIPS, reported by the
+	  linker as <code class="literal">relocation truncated to fit:
+	  R_MICROMIPS_PC16_S1</code>, has been fixed.
+        </p><p><b>Improved size optimization for microMIPS. </b>
+          The compiler now aligns microMIPS functions more
+	  efficiently when the <code class="option">-Os</code> option is used.
+        </p><p><b>Compiler crash fixed. </b>
+          A GCC bug that occasionally caused an internal compiler
+	  error during register allocation has been fixed.
+        </p><p><b>Register allocation bug fix. </b>
+          A bug in the register allocator that caused incorrect code
+	  generation has been fixed.
+        </p><p><b>Linker <code class="option">--gc-sections</code> bug fix. </b>
+          A linker bug that incorrectly caused undefined references to be 
+	  diagnosed when the <code class="option">--gc-sections</code> option is used
+	  has been fixed.
+        </p><p><b>EVA support. </b>
+	  GAS now supports MIPS EVA instructions.
+	  You can specify the <code class="option">-meva</code> option to
+	  GCC and GAS to indicate that EVA instructions are being
+	  used.
+	</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id507165"></a>A.1.2. Changes in Sourcery CodeBench Lite 2012.03-41</h3></div></div></div><p><b>Nondeterministic code generation bug fix. </b>
+          A GCC bug has been fixed that caused nondeterministic code
+          generation for some input files when optimizing.
+        </p><p><b>GCC version 4.6. </b>
+          Sourcery CodeBench Lite for MIPS ELF is now based on GCC
+          version 4.6. For more information about changes from GCC
+          version 4.5 that was included in previous releases, see
+          <code class="uri">http://gcc.gnu.org/gcc-4.6/changes.html</code>.
+        </p><p><b>Fix for internal compiler error. </b>
+          A GCC bug has been fixed that caused an internal compiler
+          error when using pointer casts in C++0x <code class="code">constexpr</code>
+          initialization expressions.
+        </p><p><b>Compact C++ exception handling tables. </b>
+	  GCC now defaults to emitting a compact encoding of C++ exception
+	  handling tables, rather than using a DWARF-based scheme.
+	  For more information, refer to the documentation of the
+	  <code class="option">-mcompact-eh</code> and
+	  <code class="option">-mno-compact-eh</code> options in the GCC manual.
+        </p><p><b>Fix for bit-field optimization bug. </b>
+          A compiler bug that caused incorrect code to be generated for
+	  programs using bit-fields has been fixed.
+        </p><p><b>Incorrect accesses to volatile memory. </b>
+	  The compiler no longer generates SWP, LWP, SWM or LWM instructions
+	  to access objects declared with the <code class="code">volatile</code> type
+	  qualifier, as these instructions can cause multiple memory accesses
+	  of unspecified ordering.
+        </p><p><b>GCC version 4.6.3. </b>
+          Sourcery CodeBench Lite for MIPS ELF is now based on GCC
+          version 4.6.3. For more information about issues that
+          have been fixed since version 4.6.1, see
+          <code class="uri">http://gcc.gnu.org/gcc-4.6/changes.html</code>.
+        </p><p><b>GCC stack usage improvement. </b>
+          GCC now generates better code for stack allocation in some
+          cases when compiling with <code class="option">-fno-strict-aliasing</code>.
+        </p><p><b>Linker <code class="option">--gc-sections</code> option bug fix. </b>
+          A bug has been fixed that caused the linker to incorrectly
+          remove the <code class="code">.debug_types</code> section when using the
+          <code class="option">--gc-sections</code> option.
+        </p><p><b>Installer failure during upgrade. </b>
+        Some recent releases were affected by an installer bug
+        on Windows hosts that caused installing a newer version of
+        Sourcery CodeBench Lite into the same directory to fail with the error
+        <code class="literal">Sourcery CodeBench Lite for MIPS ELF upgrade failed</code>.
+        This bug has now been fixed, but the affected releases cannot be
+        upgraded.  As a workaround, uninstall the older release before
+        installing the new version.
+       </p><p><b>C++ debugging bug fix. </b>
+          A GDB bug has been fixed that caused GDB to fail to
+          find <code class="code">enum</code> constants in base classes when
+          debugging C++ code.
+        </p><p><b>Fix for crash in GDB. </b>
+          A memory corruption bug in GDB has been fixed that under very rare
+          circumstances made it crash or exhibit other unpredictable behavior.
+          <span>
+            On GNU/Linux hosts, this bug caused crashes with an error message
+            similar to: <code class="literal">*** glibc detected *** mips-sde-elf-gdb:
+            free(): invalid next size (normal): 0x09466198 ***</code>
+            followed by a backtrace.
+          </span>
+        </p><p><b>Fix debugger remote target interruption. </b>
+	  A bug in GDB's handling of requests to interrupt execution on a
+	  remote target has been fixed that caused it to stop the target but
+	  not emit a stopped MI record.
+	  
+        </p><p><b>GDB internal error fix. </b>
+          A bug has been fixed that caused GDB to produce messages of
+	  the form: <code class="literal">warning: (Internal error: pc 0x1000a0 in
+	  read in psymtab, but not in symtab.)</code>
+	  when taking the addresses of symbols from objects added with
+	  the <code class="command">add-symbol-file</code> command.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id507779"></a>A.1.3. Changes in Sourcery CodeBench Lite 2011.09-86</h3></div></div></div><p><b>64-bit multilibs. </b>
+          Sourcery CodeBench Lite now includes libraries and linker scripts to build
+	  applications for MIPS64R2 N64 ABI.  Use the <code class="option">-mabi=64</code>
+	  option to compile using 64-bit multilibs, and linker scripts for
+	  the Malta board with a 64-bit processor
+	  (e.g., <code class="filename">malta64-ram-hosted.ld</code> to link executables.
+	  Multilibs for the N64 ABI are available for all combinations of
+	  big/little endianness and hardware/software floating point.
+	  Refer to <a class="xref" href="sec-multilibs.html" title="3.2. Library Configurations">Section 3.2, &#8220;Library Configurations&#8221;</a> for more information
+	  about the 64-bit multilibs.
+        </p><p><b>GCC crash bug fix. </b>
+          A GCC bug has been fixed that caused an internal compiler error
+          when a MIPS16 function was inlined into a MIPS32 function.
+        </p><p><b>GCC optimization bug fix. </b>
+          A bug in the GCC optimizer has been fixed that caused incorrect
+          code to be generated for some cases of multiplication by a
+          constant when compiling with <code class="option">-O2</code> or
+          <code class="option">-O3</code>. 
+        </p><p><b>GCC wrong code fix. </b>
+	  An optimizer bug has been fixed that caused GCC to generate code
+	  with incorrect scheduling of memory reference instructions. 
+        </p><p><b>Fix for assembler internal error. </b>
+          A bug has been fixed that caused the assembler to abort with an
+	  assertion failure in <code class="code">emit_inc_line_addr</code>.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id507969"></a>A.1.4. Changes in Sourcery CodeBench Lite 2011.09-76</h3></div></div></div><p><b>Changes to included libraries. </b>
+          Library variants built with <code class="option">-mfp64</code>,
+	  <code class="option">-mno-float</code>, and <code class="option">-mcode-readable=no</code>
+	  have been removed from Sourcery CodeBench Lite for MIPS ELF.  Please
+	  refer to <a class="xref" href="sec-multilibs.html" title="3.2. Library Configurations">Section 3.2, &#8220;Library Configurations&#8221;</a> for a list of the
+	  currently-supported multilibs.
+        </p><p><b>Fix for compiler hang. </b>
+          A bug that caused GCC to become stuck in an infinite
+	  loop in the optimizer has been fixed.
+        </p><p><b>Optimization bug fix. </b>
+	  A compiler bug has been fixed that affected some programs using
+	  type-aliased assignments to pointer variables.  The bug caused
+	  incorrect code to be generated when compiled with
+	  <code class="option">-O2</code> or <code class="option">-O3</code>. 
+        </p><p><b>Binutils version 2.21. </b>
+          Sourcery CodeBench Lite for MIPS ELF is now based on binutils
+          version 2.21.
+        </p><p><b>Assembler crash. </b>
+          The assembler now warns when there is line information for
+	  the <code class="literal">*ABS*</code> section, rather than crash.
+	  This can occur when the <code class="code">.offset</code> directive is
+	  used incorrectly.
+        </p><p><b>Fix for crash in GDB <code class="command">maint print arch</code>. </b>
+          A bug in the GDB command <code class="command">maint print arch</code>
+          that sometimes caused GDB to crash has been fixed.
+        </p><p><b>Remote command bug fix. </b>
+          A bug in the Sourcery CodeBench Debug Sprite has been fixed that caused
+          GDB's <code class="command">monitor</code> remote commands to fail without
+          performing the intended action on some versions of Windows.
+        </p><p><b>Debug Sprite option defaults. </b>
+          The Sourcery CodeBench Debug Sprite now uses default option values
+	  specified in board configuration files.  Options included in
+	  the device URL override the default values.
+        </p><p><b>Changes to host operating system requirements. </b>
+          The minimum required Microsoft Windows OS needed to run
+          Sourcery CodeBench Lite is now Windows XP (SP1).
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id508411"></a>A.1.5. Changes in Sourcery CodeBench Lite 2011.03-106</h3></div></div></div><p><b>Wrong-code bug fix. </b>
+          A compiler bug that caused incorrect code to be generated for some
+          branches with <code class="option">-mbranch-likely</code> optimization enabled
+          has been fixed.
+        </p><p><b>Map file name demangling bug fix. </b>
+	  GCC now properly passes the 
+	  <code class="option">--demangle</code> and <code class="option">--no-demangle</code>
+	  options to the linker to control map file output.  The default
+	  behavior on all hosts is now to demangle C++ names.
+        </p><p><b>MIPS16 branch bug fix. </b>
+           A compiler bug that caused incorrect code to be generated for
+ 	  MIPS16 branches with offsets greater than 65534 or less than
+ 	  -65536 has been fixed.
+         </p><p><b>Smaller exception handling tables. </b>
+	  The compiler now marks exception handling information for template
+	  functions so that the linker can remove duplicates. This also
+	  affects non-inlined inline functions.
+        </p><p><b>Binutils support for 32-bit microMIPS instructions. </b>
+          The assembler and linker now support generation of 32-bit
+          instructions only when making microMIPS code.  For more information,
+          refer to the documentation of the <code class="option">-minsn32</code>
+          assembler option and the <code class="option">--insn32</code> linker option.
+        </p><p><b>GDB interrupt handling bug fix. </b>
+	  A bug in GDB has been fixed that caused it to sometimes fail
+	  to interrupt lengthy single-step operations (as by a
+	  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span>
+	  when using GDB from the command line).
+	</p><p><b>Fix GDB crash during connection to debug agent. </b>
+          A bug has been fixed that caused GDB to crash while connecting
+	  to any debug agent through standard IO where the debug agent
+	  had detected an early error and terminated the communication.
+        </p><p><b>Debug Sprite register reporting bug fix. </b>
+	  In recent releases, the Sourcery CodeBench Debug Sprite reported an
+	  incorrect set of registers to GDB in some circumstances.  This
+	  bug has been fixed.
+        </p><p><b>Improved download speed on Windows hosts. </b>
+          The Sourcery CodeBench Debug Sprite now downloads binaries to the
+          target faster when using Windows hosts.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id508701"></a>A.1.6. Changes in Sourcery CodeBench Lite 2011.03-92</h3></div></div></div><p><b>MIPS16 switch statement compilation fix. </b>
+          A bug has been fixed that caused very large <code class="code">switch</code>
+          statements to be compiled incorrectly for MIPS16.
+        </p><p><b>Support for MIPS M14Ke and M14Kec processors. </b>
+          Sourcery CodeBench Lite now supports the MIPS M14Ke and M14Kec processors.
+          To compile for these targets, use the
+          <code class="option">-march=m14ke -mmicromips</code> or
+          <code class="option">-march=m14kec -mmicromips</code>
+          command-line options.
+        </p><p><b>MIPS16 static data bug fix. </b>
+          A compiler bug has been fixed that caused static data to be
+          accessed incorrectly from position-independent MIPS16 code in
+          rare cases.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id508832"></a>A.1.7. Changes in Sourcery CodeBench Lite 2011.03-76</h3></div></div></div><p><b>New Sourcery CodeBench Lite branding. </b>
+          Sourcery G++ has been renamed to Sourcery CodeBench.
+	  <span>
+	    This change affects the names of the default installation
+	    directory and installer-created shortcuts, but no
+	    internal pathnames or tool names within the installation directory
+	    have been changed.
+	  </span>
+	  
+        </p><p><b>Improved function call profiling. </b>
+          The compiler now supports
+          the <code class="option">-finstrument-function-calls</code> option.
+          Please see the GCC documentation for more details.
+        </p><p><b>microMIPS linker code size optimization bug fix. </b>
+          A bug has been fixed that sometimes caused the linker to generate
+          incorrect code when the <code class="option">--relax</code> option is used
+          to enable certain code size optimizations that make use of the
+          <code class="literal">ADDIUPC</code> instruction.
+        </p><p><b>Improved GDB diagnostics. </b>
+          A bug has been fixed in GDB that caused cryptic <code class="literal">assertion
+          fail</code> messages whenever a file in the unsupported SGI IRIX
+          variation of the ELF binary format was selected.  GDB now issues
+          explanatory warning messages instead.
+        </p><p><b>Improved disassembler performance in the debugger. </b>
+          GDB's disassembler has been improved to use more efficient memory
+	  access on remote targets.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id509051"></a>A.1.8. Changes in Sourcery G++ Lite 2011.03-52</h3></div></div></div><p><b>Interprocedural stack optimization. </b>
+          The compiler has a new experimental optimization that generates code
+          that claims less stack space.  To switch this optimization on, use
+          <code class="option">-mframe-header-opt</code>.
+        </p><p><b>MIPS32r2 floating-point multiply-accumulate restrictions lifted. </b>
+          Following clarifications to the MIPS architecture specification,
+          GCC has been updated to allow floating-point multiply-accumulate
+          instructions on MIPS32r2 processors in all configurations.
+        </p><p><b>Interprocedural register optimization. </b>
+          The compiler has a new experimental optimization that generates
+          better code for functions that only call functions in the same
+          object.  To switch this optimization on, use
+          <code class="option">-fuse-caller-save</code>.
+        </p><p><b>Incorrect C++ warning fixed. </b>
+          A bug in GCC has been fixed that caused spurious warnings
+	  about lambda expressions in C++ code that does not use them.
+        </p><p><b>C++ constructor bug fix. </b>
+          A compiler bug has been fixed that caused incorrect code for C++
+          constructors for some class hierarchies that use virtual inheritance
+          and include empty classes.  At runtime, the incorrect constructors
+          resulted in memory corruption or other errors.
+        </p><p><b>Improved DSP code. </b>
+	  The compiler now makes better use of DSP accumulator registers when
+          compiling with <code class="option">-mdsp</code> or <code class="option">-mdspr2</code>.
+        </p><p><b>microMIPS branches. </b>
+          A compiler bug that caused sub-optimal branch instructions
+	  to be generated in microMIPS mode has been fixed.
+        </p><p><b>Addr2line bug fix. </b>
+          A bug has been fixed that caused Addr2line to print
+	  <code class="literal">??:0</code> for any address instead of 
+         file and line number.
+        </p><p><b>24K Errata. </b>
+          The <code class="option">-mfix-24k</code> assembler option has been
+	  extended to work around Errata E48: Lost Data on Stores During
+	  Refill.
+          <span>
+          In addition, GCC now accepts this command-line option and passes it
+          through to the assembler.
+          </span> 
+        </p><p><b>CS3 linker script changes. </b>
+          CS3 linker scripts for RAM profiles have been changed
+	  to reserve only 4K at the start of memory for interrupt vectors,
+	  rather than 1M to also preserve memory used by YAMON.
+	  This change affects RAM-profile linker scripts for all
+	  supported boards, including Malta and SEAD-3 boards.  YAMON-profile
+	  linker scripts for these boards are unchanged.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id509372"></a>A.1.9. Changes in Sourcery G++ Lite 2011.03-12</h3></div></div></div><p><b>Compiler optimization improvements. </b>
+          The compiler has been enhanced with a number of optimization
+	  improvements, including:
+	  </p><div class="itemizedlist"><ul type="disc"><li>
+	      Smaller and faster code for compound conditionals.
+	    </li><li>
+	      Improved filling of branch delay slots.
+	    </li><li>
+	      Removal of superfluous sign and zero extensions.
+	    </li></ul></div><p>
+        </p><p><b>GCC version 4.5.2. </b>
+          Sourcery G++ Lite for MIPS ELF is now based on GCC version 4.5.2.
+        </p><p><b>New <code class="option">-fstrict-volatile-bitfields</code> option. </b>
+          The compiler has a new
+	  option, <code class="option">-fstrict-volatile-bitfields</code>, which
+	  forces access to a volatile structure member using the width
+	  that conforms to its type.
+	  
+	  
+	  Refer to the GCC manual for details. 
+        </p><p><b>GCC code generation bug for casts to <code class="code">volatile</code>
+          types. </b>
+          A compiler bug has been fixed that sometimes caused incorrect code
+          for references to pointers to types with <code class="code">volatile</code> casts.
+        </p><p><b>Improvements to synchronization primitives. </b>
+	  GCC's <code class="function">__sync</code> built-in functions
+	  have been improved to make better use of MIPS atomic instructions.
+	  
+	</p><p><b>Incorrect optimization fix. </b>
+          An optimizer bug that in rare cases caused incorrect code to
+	  be generated for complex AND and OR expressions containing
+	  redundant subexpressions has been fixed.
+        </p><p><b>GCC microMIPS code size improvement. </b>
+          GCC has been improved to generate smaller code around function
+          calls.
+        </p><p><b>GCC bug where accesses to volatile structure fields are optimized away. </b>
+          A bug has been fixed where accesses to volatile fields of a structure
+	  were sometimes incorrectly optimized away if the structure instance
+	  was defined as non-volatile.
+        </p><p><b>Linker debug information fix. </b>
+          A bug in linker processing of debug information has been
+          fixed.  The bug sometimes prevented the Sourcery G++ debugger from
+          displaying source code if the executable was linked
+	  with the <code class="option">--gc-sections</code> option.
+        </p><p><b>microMIPS linker code size optimization bug fix. </b>
+          A bug has been fixed that sometimes caused the linker to generate
+          incorrect code when the <code class="option">--relax</code> option is used
+          to enable certain code size optimizations.
+        </p><p><b>microMIPS DSP ASE. </b>
+	  The assembler now supports microMIPS encodings for
+	  the DSP ASE instructions.
+        </p><p><b>MCU ASE instructions assembler bug fixes. </b>
+          Bugs have been fixed that caused the assembler to sometimes
+          generate incorrect code for the MCU ASE <code class="code">ACLR</code>,
+          <code class="code">ASET</code> and <code class="code">IRET</code> instructions.
+        </p><p><b><code class="code">COP2</code> instruction bug fix. </b>
+          A bug in handling of the <code class="code">COP2</code> instruction's
+          argument has been fixed in the assembler and disassembler.
+        </p><p><b>GDB microMIPS disassembler bug fix. </b>
+          A bug in GDB has been fixed that caused some microMIPS
+          instructions to disassemble incorrectly.
+        </p><p><b>Debugger warnings quieted. </b>
+	  GDB no longer prints <code class="literal">RMT ERROR</code> diagnostics
+	  on connection to the Sourcery G++ Debug Sprite.
+	  In spite of the alarming appearance of the messages, they were
+	  not actually indicative of a serious problem.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id510154"></a>A.1.10. Changes in Sourcery G++ Lite 2010.09-28</h3></div></div></div><p><b>Changes to Sourcery G++ version numbering. </b>
+          Sourcery G++ product and Lite toolchains now uniformly use
+	  a version numbering scheme of the form 2012.03-64.
+	  The major and minor parts of the version number, in this
+	  case 2012.03, identify the release branch,
+	  while the final component is a build number within the branch.
+	  There are also new preprocessor macros defined by the compiler
+	  for the version number components so that you may conditionalize
+	  code for Sourcery G++ or particular Sourcery G++ versions.
+	  Details are available in the 
+	  <a class="ulink" href="https://support.codesourcery.com/GNUToolchain/kbentry1" target="_top">
+	  Sourcery G++ Knowledge Base</a>.	
+        </p><p><b>Alignment attributes. </b>
+	  A bug has been fixed that caused the compiler to ignore
+	  alignment attributes of C++ static member variables where
+	  the attribute was present on the definition, but not the
+	  declaration.
+	</p><p><b>Compiler optimization improvements. </b>
+          The compiler has been enhanced with a number of optimization
+	  improvements, including:
+	  </p><div class="itemizedlist"><ul type="disc"><li>
+	      More efficient assignment for structures containing bitfields.
+	    </li><li>
+	      Better code for initializing C++ arrays with explicit
+	      element initializers.
+	    </li><li>
+	      Improved logic for eliminating/combining redundant comparisons in
+	      code with nested conditionals.
+	    </li><li>
+	      Better selection of loop variables, resulting in fewer
+	      temporaries and more efficient register usage.
+	    </li><li>
+              Better code when constant addresses are used as arguments to
+              inline assembly statements.
+            </li><li>
+	      Better code for copying small constant strings.
+	    </li></ul></div><p>
+        </p><p><b>GCC version 4.5.1. </b>
+	  Sourcery G++ Lite for MIPS ELF is now based on GCC version 4.5.1.
+	  For more information about changes from GCC version 4.4 that was
+	  included in previous releases, see
+	  <code class="uri">http://gcc.gnu.org/gcc-4.5/changes.html</code>.
+        </p><p><b>Archiver bug fix. </b>
+          A bug has been fixed in the <code class="command">ar</code> utility,
+          which sometimes caused it to produce unrecognizable 64-bit
+          files. The bug also caused similar problems in the
+          <code class="command">strip</code> and <code class="command">objcopy</code>
+          utilities when processing 64-bit archives.
+        </p><p><b>Fix for incorrect MIPS16 and microMIPS relocations. </b>
+          An assembler bug has been fixed that caused incorrect
+          relocation information to be produced for MIPS16 and microMIPS
+          code, diagnosed by a <code class="literal">Can't find matching LO16
+          reloc</code> linker warning.
+        </p><p><b>Additional validation in the assembler. </b>
+          The assembler now diagnoses an error, instead of producing
+          an invalid object file, when directives such as
+          <code class="literal">.hidden</code> are missing operands.
+          
+        </p><p><b>Binutils update. </b>
+	  The binutils package has been updated to version
+	  2.20.51.20100809 from the FSF trunk.  This update includes
+	  numerous bug fixes.
+        </p><p><b>Additional alignment in CS3-defined linker scripts. </b>
+	  Sourcery G++ now ensures 8-byte alignment at additional points
+	  in CS3-defined linker scripts.  Previously, placing a symbol
+	  in certain sections broke the initialization of
+	  the <code class="literal">.data</code> and/or <code class="literal">.bss</code>
+	  sections.
+        </p><p><b>Newlib update. </b>
+          The Newlib package has been updated to version 1.18.0, with
+          additions from the community CVS trunk as of 2010-08-12.
+          This update provides additional wide-character functions,
+          along with other bug fixes and enhancements.
+        </p><p><b>GDB update. </b>
+	  The included version of GDB has been updated to
+	  7.2.50.20100908.  This update adds numerous bug fixes and
+	  new features, including improved C++ language support,
+	   a new command to save breakpoints to a file,
+	   a new
+	  convenience variable <code class="varname">$_thread</code> that holds
+	  the number of the current thread, among many other
+	  improvements.
+	</p><p><b>GDB crash fix. </b>
+          A bug has been fixed that caused GDB to crash on launch if
+          the environment variable <code class="literal">CYGPATH</code> is set
+          to a program that does not exist or cannot be executed.
+        </p><p><b>Debug Sprite abnormal termination bug fix. </b>
+          The Sourcery G++ Debug Sprite no longer terminates abnormally
+          if GDB is killed while the target is waiting for semihosted
+          I/O to complete.  The bug was only triggered when running GDB
+          on a Windows host.
+        </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id510649"></a>A.1.11. Changes in Older Releases</h3></div></div></div><p>
+        For information about changes in older releases of
+	Sourcery G++ Lite for MIPS ELF, 
+	please refer to the Getting Started guide packaged with those
+	releases.
+      </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch07s03.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="chap-license.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">7.3. Manuals for GNU Toolchain Components </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Appendix B. Sourcery CodeBench Lite Licenses</td></tr></table></div></body></html>
